@@ -1,0 +1,155 @@
+---
+// Kopfbereich mit Navigation: volle Breite, heller Akzentton.
+// Inhalt: Name, ein Satz Profil, Button Lebenslauf, Link Kontakt.
+// Alle Texte kommen aus src/data/profile.json und projects.json.
+// Leere Felder werden nicht gerendert, Navigationspunkte nur für vorhandene Abschnitte.
+import { getCollection } from 'astro:content';
+import { profile, assetUrl } from '../lib/profile';
+
+const { name, profil, lebenslauf, kontakt } = profile;
+const hatKontakt = Boolean(kontakt.email || kontakt.linkedin || kontakt.github);
+const hatProjekte = (await getCollection('projekte')).length > 0;
+
+const navigation = [
+  hatProjekte && { label: 'Projekte', href: '#projekte' },
+  hatKontakt && { label: 'Kontakt', href: '#kontakt' },
+].filter((n): n is { label: string; href: string } => Boolean(n));
+---
+
+<a class="sprunglink" href="#inhalt">Zum Inhalt</a>
+
+<header class="kopf">
+  {
+    navigation.length > 0 && (
+      <nav class="inhalt navigation" aria-label="Hauptnavigation">
+        {name && <a class="navigation__name" href="#">{name}</a>}
+        <ul class="navigation__liste">
+          {navigation.map((n) => (
+            <li>
+              <a href={n.href}>{n.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+
+  <div class="inhalt kopf__innen">
+    {name && <h1>{name}</h1>}
+    {profil && <p class="kopf__profil">{profil}</p>}
+    <div class="kopf__aktionen">
+      {
+        lebenslauf.datei && (
+          <a class="knopf" href={assetUrl(lebenslauf.datei)}>
+            {lebenslauf.label}
+          </a>
+        )
+      }
+      {hatKontakt && <a class="textlink" href="#kontakt">Kontakt</a>}
+    </div>
+  </div>
+</header>
+
+<style>
+  .sprunglink {
+    position: absolute;
+    left: var(--abstand-2);
+    top: -64px;
+    padding: var(--abstand-1) var(--abstand-2);
+    background: var(--farbe-akzent);
+    color: var(--farbe-auf-akzent);
+  }
+
+  .sprunglink:focus {
+    top: var(--abstand-1);
+    z-index: 10;
+  }
+
+  .kopf {
+    background: var(--farbe-akzent-hell);
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+
+  /* Navigation: Name links, Abschnitte rechts, auf dem Handy umbrechend */
+  .navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--abstand-1) var(--abstand-3);
+    padding-block: var(--abstand-2);
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+
+  .navigation a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  .navigation__name {
+    color: var(--farbe-text);
+    font-family: var(--schrift-serif);
+    font-weight: var(--gewicht-stark);
+    text-decoration: none;
+  }
+
+  .navigation__liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--abstand-1) var(--abstand-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .kopf__innen {
+    padding-block: var(--abstand-12) var(--abstand-8);
+  }
+
+  .kopf__profil {
+    max-width: 36em;
+    margin-top: var(--abstand-3);
+  }
+
+  .kopf__aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--abstand-1) var(--abstand-3);
+    margin-top: var(--abstand-4);
+  }
+
+  .kopf__aktionen:empty {
+    display: none;
+  }
+
+  .knopf,
+  .textlink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+  }
+
+  .knopf {
+    padding-inline: var(--abstand-3);
+    background: var(--farbe-akzent);
+    color: var(--farbe-auf-akzent);
+    font-weight: var(--gewicht-stark);
+    text-decoration: none;
+  }
+
+  .knopf:focus-visible {
+    outline-color: var(--farbe-text);
+  }
+
+  @media (max-width: 600px) {
+    .kopf__innen {
+      padding-block: var(--abstand-8) var(--abstand-6);
+    }
+
+    .navigation__name {
+      flex-basis: 100%;
+    }
+  }
+</style>

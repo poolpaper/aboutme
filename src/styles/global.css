@@ -1,0 +1,73 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--farbe-grund);
+  color: var(--farbe-text);
+  font-family: var(--schrift-text);
+  font-size: var(--groesse-text);
+  font-weight: var(--gewicht-normal);
+  line-height: var(--zeilenhoehe);
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--schrift-serif);
+  font-weight: var(--gewicht-stark);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--groesse-name);
+}
+
+h2 {
+  font-size: var(--groesse-titel);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--farbe-akzent);
+  text-underline-offset: 4px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--farbe-akzent);
+  outline-offset: 4px;
+}
+
+/* Inhaltsspalte: maximal 880 px, auf dem Handy mit Rand */
+.inhalt {
+  width: 100%;
+  max-width: calc(var(--inhalt-max) + 2 * var(--rand));
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+.abschnitt {
+  padding-block: var(--abstand-8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

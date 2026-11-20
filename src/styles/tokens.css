@@ -1,0 +1,43 @@
+/* Design-Tokens. Einzige Quelle für Farben, Schrift und Abstände.
+   Regeln stehen in CLAUDE.md. Keine Werte im Komponenten-CSS duplizieren. */
+
+:root {
+  /* Farbe */
+  --farbe-grund: #fafaf7;
+  --farbe-text: #1b1f1d;
+  --farbe-text-leise: #5c635f;
+  --farbe-linie: #e4e6e1;
+  --farbe-akzent: #1f5e4b;
+  --farbe-akzent-hell: #e3eee8;
+  --farbe-auf-akzent: #ffffff;
+
+  /* Schrift */
+  --schrift-serif: Georgia, 'Times New Roman', serif;
+  --schrift-text: system-ui, sans-serif;
+  --gewicht-normal: 400;
+  --gewicht-stark: 600;
+  --groesse-name: 72px;
+  --groesse-titel: 28px;
+  --groesse-text: 18px;
+  --zeilenhoehe: 1.6;
+
+  /* Abstand im 8-px-Raster */
+  --abstand-1: 8px;
+  --abstand-2: 16px;
+  --abstand-3: 24px;
+  --abstand-4: 32px;
+  --abstand-6: 48px;
+  --abstand-8: 64px;
+  --abstand-12: 96px;
+
+  /* Layout */
+  --inhalt-max: 880px;
+  --rand: var(--abstand-3);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --groesse-name: 44px;
+    --rand: var(--abstand-2);
+  }
+}

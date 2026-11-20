@@ -1,0 +1,59 @@
+---
+// Kontakt: nur Angaben aus src/data/profile.json, leere Felder entfallen.
+import { profile } from '../lib/profile';
+
+const { email, linkedin, github } = profile.kontakt;
+const eintraege = [
+  email && { label: 'E-Mail', href: `mailto:${email}`, text: email },
+  linkedin && { label: 'LinkedIn', href: linkedin, text: linkedin },
+  github && { label: 'GitHub', href: github, text: github },
+].filter((e): e is { label: string; href: string; text: string } => Boolean(e));
+---
+
+{
+  eintraege.length > 0 && (
+    <footer class="abschnitt kontakt" id="kontakt">
+      <div class="inhalt">
+        <h2>Kontakt</h2>
+        <ul class="kontakt__liste">
+          {eintraege.map((e) => (
+            <li>
+              <span class="kontakt__label">{e.label}</span>
+              <a href={e.href}>{e.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </footer>
+  )
+}
+
+<style>
+  .kontakt {
+    border-top: 1px solid var(--farbe-linie);
+  }
+
+  .kontakt__liste {
+    margin: var(--abstand-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .kontakt__liste li {
+    display: grid;
+    grid-template-columns: 176px 1fr;
+    gap: var(--abstand-3);
+    padding-block: var(--abstand-1);
+  }
+
+  .kontakt__label {
+    color: var(--farbe-text-leise);
+  }
+
+  @media (max-width: 600px) {
+    .kontakt__liste li {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

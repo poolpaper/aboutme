@@ -1,0 +1,26 @@
+[
+  {
+    "id": "masterthesis-ehd-luefter",
+    "reihenfolge": 1,
+    "zeitraum": "Aug. 2024 – Jan. 2025",
+    "titel": "Masterthesis: elektrohydrodynamischer Lüfter für Tower-PCs",
+    "rolle": "Masterand, Technische Universität Graz",
+    "ergebnis": "Entwicklung und Evaluation eines funktionalen Prototyps eines elektrohydrodynamischen Lüfters zur Kühlung von PC-Komponenten in Tower-PCs (Note: 1,0)."
+  },
+  {
+    "id": "spacebattle-volkswagen",
+    "reihenfolge": 2,
+    "zeitraum": "Okt. 2023 – März 2024",
+    "titel": "Masterprojekt Spacebattle, Volkswagen AG",
+    "rolle": "Projektleiter",
+    "ergebnis": "Intensive Befragung zur Frunk-Nutzung und Entwicklung von Nutzungskonzepten für die zukünftige Nutzung des Frunk und Trunk in EVs."
+  },
+  {
+    "id": "chinprotect-scott",
+    "reihenfolge": 3,
+    "zeitraum": "Apr. 2023 – Sep. 2023",
+    "titel": "Masterprojekt Chinprotect, Scott Sports SA",
+    "rolle": "Entwicklungsingenieur",
+    "ergebnis": "Entwicklung eines innovativen Verschlussmechanismus für Fullface-Mountainbike-Helme."
+  }
+]

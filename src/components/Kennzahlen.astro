@@ -1,0 +1,64 @@
+---
+// Kennzahlen-Leiste: drei Zahlen aus den Projekten, groß in Serif,
+// darunter kurz, wofür sie stehen. Einträge ohne Zahl werden übersprungen.
+import { profile } from '../lib/profile';
+
+const zahlen = profile.kennzahlen.filter((k) => k.zahl);
+---
+
+{
+  zahlen.length > 0 && (
+    <section class="kennzahlen" aria-label="Kennzahlen">
+      <ul class="inhalt kennzahlen__liste">
+        {zahlen.map((k) => (
+          <li>
+            <span class="kennzahlen__zahl">{k.zahl}</span>
+            <span class="kennzahlen__text">{k.beschreibung}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .kennzahlen {
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+
+  .kennzahlen__liste {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--abstand-4);
+    margin-block: 0;
+    padding-block: var(--abstand-6);
+    list-style: none;
+  }
+
+  .kennzahlen__zahl {
+    display: block;
+    color: var(--farbe-akzent);
+    font-family: var(--schrift-serif);
+    font-size: 56px;
+    font-weight: var(--gewicht-stark);
+    line-height: 1.1;
+  }
+
+  .kennzahlen__text {
+    display: block;
+    margin-top: var(--abstand-1);
+    color: var(--farbe-text-leise);
+  }
+
+  @media (max-width: 600px) {
+    .kennzahlen__liste {
+      grid-template-columns: 1fr;
+      gap: var(--abstand-3);
+      padding-block: var(--abstand-4);
+    }
+
+    .kennzahlen__zahl {
+      font-size: 44px;
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Kopfbereich from '../components/Kopfbereich.astro';
+import Kennzahlen from '../components/Kennzahlen.astro';
+import ProjektListe from '../components/ProjektListe.astro';
+import Kontakt from '../components/Kontakt.astro';
+import { profile } from '../lib/profile';
+
+const titel = profile.name ? `${profile.name} – Portfolio` : 'Portfolio';
+---
+
+<Base titel={titel} beschreibung={profile.profil || undefined}>
+  <Kopfbereich />
+  <main id="inhalt">
+    <Kennzahlen />
+    <ProjektListe />
+  </main>
+  <Kontakt />
+</Base>

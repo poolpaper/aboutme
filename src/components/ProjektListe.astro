@@ -1,0 +1,69 @@
+---
+// Projekte als Liste mit Linien statt Kästen.
+// Links Zeitraum, rechts Titel, Rolle, Ergebnis. Daten: src/data/projects.json
+import { getCollection } from 'astro:content';
+
+const projekte = (await getCollection('projekte')).sort(
+  (a, b) => (a.data.reihenfolge ?? 0) - (b.data.reihenfolge ?? 0),
+);
+---
+
+{
+  projekte.length > 0 && (
+    <section class="abschnitt" id="projekte">
+      <div class="inhalt">
+        <h2>Projekte</h2>
+        <ol class="projekte">
+          {projekte.map(({ data }) => (
+            <li class="projekt">
+              <p class="projekt__zeit">{data.zeitraum}</p>
+              <div>
+                <h3 class="projekt__titel">{data.titel}</h3>
+                <p class="projekt__rolle">{data.rolle}</p>
+                <p class="projekt__ergebnis">{data.ergebnis}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .projekte {
+    margin: var(--abstand-4) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--farbe-linie);
+  }
+
+  .projekt {
+    display: grid;
+    grid-template-columns: 176px 1fr;
+    gap: var(--abstand-3);
+    padding-block: var(--abstand-4);
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+
+  .projekt__zeit,
+  .projekt__rolle {
+    color: var(--farbe-text-leise);
+  }
+
+  .projekt__titel {
+    font-size: 22px;
+  }
+
+  .projekt__ergebnis {
+    margin-top: var(--abstand-1);
+  }
+
+  @media (max-width: 600px) {
+    .projekt {
+      grid-template-columns: 1fr;
+      gap: var(--abstand-1);
+      padding-block: var(--abstand-3);
+    }
+  }
+</style>
